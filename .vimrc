@@ -63,10 +63,10 @@ set termencoding=utf-8
 " set save encoding
 set fileencoding=utf-8
 " Список для определения кодировки файла в порядке предпочтения
-set fileencodings=utf8,koi8r,cp1251,cp866,ucs-2le   
+set fileencodings=utf8,cp1251,koi8-r,cp866,ucs-2le   
 " Строка состояния
-" set laststatus=2   " всегда показывать строку статуса
-" set statusline=%f%m%r%h%w\ %y\ enc:%{&enc}\ ff:%{&ff}\ fenc:%{&fenc}%=(ch:%3b\ hex:%2B)\ col:%2c\ line:%2l/%L\ [%2p%%]
+set laststatus=2   " всегда показывать строку статуса
+set statusline=%f%m%r%h%w\ %y\ enc:%{&enc}\ ff:%{&ff}\ fenc:%{&fenc}%=(ch:%3b\ hex:%2B)\ col:%2c\ line:%2l/%L\ [%2p%%]
 " Сворачивание блоков
 set foldenable
 " Сворачиваем на основе синтаксиса
@@ -124,8 +124,8 @@ map <F2> <Esc>:w<CR>
 imap <F3> <Esc>:read 
 map <F3> <Esc>:read 
 " По <F4> открывается новая вкладка (tab) и выводится список каталогов и файлов текущего каталога.
-imap <F4> <Esc>:browse tabnew<CR> 
-map <F4> <Esc>:browse tabnew<CR>
+" imap <F4> <Esc>:browse tabnew<CR> 
+" map <F4> <Esc>:browse tabnew<CR>
 " По <F5> позволяет переключать вкладки справа-налево, по-порядку, отображая открытые в них файлы.
 imap <F5> <Esc> :tabprev <CR>i
 map <F5> :tabprev <CR>
@@ -135,6 +135,7 @@ map <F6> :tabnext <CR>
 " По <F12> в конец файла и добавляем
 imap <F12> <Esc> GGO
 map <F12>  GGO
+map <C-n> :NERDTreeToggle<CR>
 "
 "   Меню
 "
@@ -161,7 +162,7 @@ set wcm=<Tab>
 menu Exit.quit     :quit<CR>
 menu Exit.quit!    :quit!<CR>
 menu Exit.save     :exit<CR>
-map <F10> :emenu Exit.<Tab>
+map <F11> :emenu Exit.<Tab>
 " F11 - работа с кодировками
 set wildmenu
 set wcm=<Tab>
@@ -170,7 +171,7 @@ menu Encoding.cp1251  :e ++enc=cp1251<CR>
 menu Encoding.cp866   :e ++enc=cp866<CR>
 menu Encoding.ucs-2le :e ++enc=ucs-2le<CR>
 menu Encoding.utf-8   :e ++enc=utf-8<CR>
-map <F11> :emenu Encoding.<Tab>
+map <F10> :emenu Encoding.<Tab>
 "
 "   Функции
 "
@@ -203,6 +204,7 @@ function! WritePyinit()
 endfunction
 autocmd BufNewFile *.py call WritePyinit()
 
+autocmd FileType *.PS1 execute 'e ++enc=cp1251'
 " Включить словарь - исходя из расширения файла
 autocmd FileType * execute 'setlocal dict+=~/.vim/words/'.&filetype.'.txt'
 
@@ -236,7 +238,7 @@ call plug#begin('~/.vim/plugged')
 " Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 
 " On-demand loading
-" Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+ Plug 'preservim/nerdtree', { 'on':  'NERDTreeToggle' }
 " Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 
 " Using a non-master branch
@@ -250,18 +252,25 @@ call plug#begin('~/.vim/plugged')
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'pprovost/vim-ps1'
+" Необходим перед этим установить NerdFonts
 Plug 'ryanoasis/vim-devicons'
 " Initialize plugin system
 call plug#end()
 
+au BufNewFile,BufRead   *.PS1   set ft=ps1
 "let g:airline_statusline_ontop=1
 let g:airline_powerline_fonts = 1 "Включить поддержку Powerline шрифтов
-let g:airline#extensions#keymap#enabled = 0 "Не показывать текущий маппинг
+"let g:airline#extensions#keymap#enabled = 0 "Не показывать текущий маппинг
 let g:airline_section_z = "\ue0a1:%l/%L Col:%c" "Кастомная графа положения курсора
 let g:Powerline_symbols='unicode' "Поддержка unicode
-let g:airline#extensions#xkblayout#enabled = 0 "Про это позже расскажу
+"let g:airline#extensions#xkblayout#enabled = 0 "Про это позже расскажу
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = '>'
 let g:airline#extensions#tabline#left_alt_sep = '<'
 
+autocmd VimEnter * nmap <F4> :NERDTreeToggle<CR>
+autocmd VimEnter * imap <F4> <Esc>:NERDTreeToggle<CR>a
+let NERDTreeQuitOnOpen=1
+let NERDTreeWinSize=35
 
