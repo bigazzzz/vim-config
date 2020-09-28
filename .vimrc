@@ -16,7 +16,7 @@ set linebreak
 " Дополнение в виде меню
 set completeopt=menu
 " Чтобы нормально вводить команды в русской раскладке
-set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz
+"set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz
 " по умолчанию - латинская раскладка
 set iminsert=0
 " по умолчанию - латинская раскладка при поиске
@@ -73,7 +73,6 @@ set foldenable
 set foldmethod=syntax
 " Сворачиваем на основе отступов
 " set foldmethod=indent
-autocmd FileType *.py execute 'set foldmethod=indent'
 " При автодополнении подсказки
 set wildmenu
 " Отображать табуляцию и переводы строк
@@ -190,12 +189,12 @@ map <F10> :emenu Encoding.<Tab>
  inoremap <s-tab> <c-r>=InsertTabWrapper ("backward")<cr>
 " 
 " Всплывающий перевод
-function! MyBalloonExpr()
-       return system("sdcv -0nce ". v:beval_text)
-endfunction
-set bexpr=MyBalloonExpr()
-set ballooneval
-set balloondelay=100
+"function! MyBalloonExpr()
+"       return system("sdcv -0nce ". v:beval_text)
+"endfunction
+"set bexpr=MyBalloonExpr()
+"set ballooneval
+"set balloondelay=100
 
 " Новый Python файл забиваем стандартом
 function! WritePyinit()
@@ -203,6 +202,7 @@ function! WritePyinit()
     execute "0put q"
 endfunction
 autocmd BufNewFile *.py call WritePyinit()
+autocmd FileType *.py execute 'set foldmethod=indent'
 
 " Новый sh скрипт
 function! WriteShinit()
@@ -215,8 +215,11 @@ autocmd BufNewFile *.sh call WriteShinit()
 au! BufNewFile,BufReadPost *.{yaml,yml} set filetype=yaml foldmethod=indent
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
+" включаем поддержку powershell
+autocmd BufNewFile,BufRead   *.PS1   set ft=ps1
 autocmd FileType *.PS1 execute 'e ++enc=cp1251'
-" Включить словарь - исходя из расширения файла
+
+  " Включить словарь - исходя из расширения файла
 autocmd FileType * execute 'setlocal dict+=~/.vim/words/'.&filetype.'.txt'
 
 
@@ -269,7 +272,6 @@ Plug 'ryanoasis/vim-devicons'
 " Initialize plugin system
 call plug#end()
 
-au BufNewFile,BufRead   *.PS1   set ft=ps1
 "let g:airline_statusline_ontop=1
 let g:airline_powerline_fonts = 1 "Включить поддержку Powerline шрифтов
 "let g:airline#extensions#keymap#enabled = 0 "Не показывать текущий маппинг
