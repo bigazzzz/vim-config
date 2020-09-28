@@ -204,6 +204,17 @@ function! WritePyinit()
 endfunction
 autocmd BufNewFile *.py call WritePyinit()
 
+" Новый sh скрипт
+function! WriteShinit()
+    let @q = "\#\!/bin/bash \n\n"
+    execute "0put q"
+endfunction
+autocmd BufNewFile *.sh call WriteShinit()
+
+" add yaml stuffs
+au! BufNewFile,BufReadPost *.{yaml,yml} set filetype=yaml foldmethod=indent
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+
 autocmd FileType *.PS1 execute 'e ++enc=cp1251'
 " Включить словарь - исходя из расширения файла
 autocmd FileType * execute 'setlocal dict+=~/.vim/words/'.&filetype.'.txt'
