@@ -4,7 +4,7 @@
 " Включаем подсветку синтаксиса
 syntax on
 " Цветовая схема
-colorscheme darkblue
+" colorscheme darkblue
 " Регистронезависимый поиск
 set ignorecase
 " Игнорировать регистр при поиске, если нет больших букв
@@ -16,7 +16,7 @@ set linebreak
 " Дополнение в виде меню
 set completeopt=menu
 " Чтобы нормально вводить команды в русской раскладке
-"set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz
+set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz
 " по умолчанию - латинская раскладка
 set iminsert=0
 " по умолчанию - латинская раскладка при поиске
@@ -68,9 +68,11 @@ set fileencodings=utf8,cp1251,koi8-r,cp866,ucs-2le
 set laststatus=2   " всегда показывать строку статуса
 set statusline=%f%m%r%h%w\ %y\ enc:%{&enc}\ ff:%{&ff}\ fenc:%{&fenc}%=(ch:%3b\ hex:%2B)\ col:%2c\ line:%2l/%L\ [%2p%%]
 " Сворачивание блоков
-set foldenable
+" set foldenable
+set nofoldenable
 " Сворачиваем на основе синтаксиса
-set foldmethod=syntax
+"set foldmethod=syntax
+set foldmethod=manual
 " Сворачиваем на основе отступов
 " set foldmethod=indent
 " При автодополнении подсказки
@@ -91,6 +93,9 @@ set ruler
 set showcmd
 " Отображение парных символов
 set showmatch
+" убираем бэкапы и свапы отдельно
+set backupdir=~/.vim/backups
+set directory=~/.vim/swaps
 " Подсвечивать линию текста, на которой находится курсор
 "set cursorline
 "highlight CursorLine guibg=lightblue ctermbg=lightblue
@@ -222,6 +227,10 @@ autocmd FileType *.PS1 execute 'e ++enc=cp1251'
   " Включить словарь - исходя из расширения файла
 autocmd FileType * execute 'setlocal dict+=~/.vim/words/'.&filetype.'.txt'
 
+" Toggle paste mode
+" "   (prefer this over 'pastetoggle' to echo current state)
+nmap <leader>p :setlocal paste! paste?<cr>
+
 
 " доработка – автозагрузка произвольного конфигурационного файла из директории запуска vim. это позволяет, к примеру, задать определенные настройки компилятора для каждой из директорий и при запуски vim-а подгружить их автоматически. настройки должны быть записаны в файл .vim_config.
 if filereadable(".vim_config")
@@ -234,7 +243,6 @@ if empty(glob('~/.vim/autoload/plug.vim'))
       autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-" настройки для vim-plug
 " Specify a directory for plugins
 " - For Neovim: stdpath('data') . '/plugged'
 " - Avoid using standard Vim directory names like 'plugin'
@@ -252,7 +260,7 @@ call plug#begin('~/.vim/plugged')
 " Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 
 " On-demand loading
- Plug 'preservim/nerdtree', { 'on':  'NERDTreeToggle' }
+ Plug 'preservim/nerdtree' ", { 'on':  'NERDTreeToggle' }
 " Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 
 " Using a non-master branch
@@ -267,6 +275,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'pprovost/vim-ps1'
+Plug 'ErichDonGubler/vim-sublime-monokai'
 " Необходим перед этим установить NerdFonts
 Plug 'ryanoasis/vim-devicons'
 " Initialize plugin system
@@ -287,3 +296,4 @@ autocmd VimEnter * imap <F4> <Esc>:NERDTreeToggle<CR>a
 let NERDTreeQuitOnOpen=1
 let NERDTreeWinSize=35
 
+colorscheme sublimemonokai
