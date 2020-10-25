@@ -4,11 +4,8 @@
 
 ```
 apt install vim -y
-
 tea -a .bashrc << EOF
-
 alias vi="vim
-
 EOF
 ```
 
@@ -21,7 +18,6 @@ EOF
 
 ```
 $sudo -s
-
 #curl -sL install-node.now.sh/lts | bash
 ```
 
@@ -34,6 +30,6 @@ $sudo -s
 
 ## Quick install
 ```
-curl -sL https://raw.githubusercontent.com/bigazzzz/vim-config/master/install.sh 
+wget https://raw.githubusercontent.com/bigazzzz/vim-config/master/install.sh 
 chmod +x install.sh
 sudo ./install.sh
