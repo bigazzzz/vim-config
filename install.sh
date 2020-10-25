@@ -1,4 +1,4 @@
-#!/bin/bash 
+#!/bin/sh 
 
 # устанавливаем node.js
 curl -sL install-node.now.sh/lts | bash
