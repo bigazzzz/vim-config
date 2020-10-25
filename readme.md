@@ -2,12 +2,15 @@
 
 Используем VIM
 
-'''
+```
 apt install vim -y
+
 tea -a .bashrc << EOF
+
 alias vi="vim
+
 EOF
-'''
+```
 
 
 Возможно придется установить nerd-fonts для иконок в NerdTree https://github.com/ryanoasis/nerd-fonts
@@ -16,13 +19,21 @@ EOF
 Для плагина автодополнения для Kubernetes необходимо установить nodejs
 
 
-'''
-curl -sL install-node.now.sh/lts | bash
-'''
+```
+$sudo -s
+
+#curl -sL install-node.now.sh/lts | bash
+```
 
 Затем установить плагин yaml
 
-'''
+```
 :CocInstall yaml
-'''
+```
 
+
+## Quick install
+```
+curl -sL https://raw.githubusercontent.com/bigazzzz/vim-config/master/install.sh 
+chmod +x install.sh
+sudo ./install.sh
