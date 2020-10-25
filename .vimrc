@@ -308,3 +308,17 @@ if !empty(glob('~/.vim/plugged/vim-sublime-monokai'))
     colorscheme sublimemonokai
 endif
 
+function! FormatJson()
+python3 << EOF
+import vim
+import json
+try:
+    buf = vim.current.buffer
+    json_content = '\n'.join(buf[:])
+    content = json.loads(json_content)
+    sorted_content = json.dumps(content, indent=4, sort_keys=True)
+    buf[:] = sorted_content.split('\n')
+except Exception as e:
+    print(e)
+EOF
+endfunction
