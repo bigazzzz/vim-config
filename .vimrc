@@ -93,8 +93,12 @@ set ruler
 set showcmd
 " Отображение парных символов
 set showmatch
-" убираем бэкапы и свапы отдельно
+
+" убираем бэкапы отдельно
+silent !mkdir ~/.vim/backups > /dev/null 2>&1
 set backupdir=~/.vim/backups
+" убираем свапы отдельно
+silent !mkdir ~/.vim/swaps > /dev/null 2>&1
 set directory=~/.vim/swaps
 " Подсвечивать линию текста, на которой находится курсор
 "set cursorline
@@ -281,6 +285,10 @@ Plug 'ryanoasis/vim-devicons'
 " Initialize plugin system
 call plug#end()
 
+
+
+
+
 "let g:airline_statusline_ontop=1
 let g:airline_powerline_fonts = 1 "Включить поддержку Powerline шрифтов
 "let g:airline#extensions#keymap#enabled = 0 "Не показывать текущий маппинг
@@ -296,4 +304,7 @@ autocmd VimEnter * imap <F4> <Esc>:NERDTreeToggle<CR>a
 let NERDTreeQuitOnOpen=1
 let NERDTreeWinSize=35
 
-colorscheme sublimemonokai
+if !empty(glob('~/.vim/plugged/vim-sublime-monokai'))
+    colorscheme sublimemonokai
+endif
+
