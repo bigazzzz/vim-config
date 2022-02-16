@@ -299,6 +299,7 @@ let g:Powerline_symbols='unicode' "Поддержка unicode
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = '>'
 let g:airline#extensions#tabline#left_alt_sep = '<'
+let g:coc_disable_startup_warning = 1
 
 autocmd VimEnter * nmap <F4> :NERDTreeToggle<CR>
 autocmd VimEnter * imap <F4> <Esc>:NERDTreeToggle<CR>a
