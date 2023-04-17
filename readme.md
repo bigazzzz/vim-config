@@ -1,3 +1,4 @@
+Переехал в https://github.com/bigazzzz/profile
 # Моя конфигурация vim
 
 Используем VIM
@@ -30,6 +31,6 @@ $sudo -s
 
 ## Quick install
 ```
-wget https://raw.githubusercontent.com/bigazzzz/vim-config/master/install.sh 
+wget https://raw.githubusercontent.com/bigazzzz/vim-config/master/install.sh
 chmod +x install.sh
 sudo ./install.sh

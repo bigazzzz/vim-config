@@ -38,7 +38,7 @@ set expandtab
 " В командах отступа 4 пробела
 set shiftwidth=4
 " отображение выполняемой команды
-set showcmd 
+set showcmd
 " перенос по словам, а не по буквам
 set linebreak
 set dy=lastline
@@ -49,11 +49,11 @@ set autoread
 " использовать диалоги вместо сообщений об ошибках
 set confirm
 " во избежание лишней путаницы использовать системный буфер обмена вместо буфера Vim
-set clipboard=unnamed 
+set clipboard=unnamed
 " включить сохранение резервных копий
 set backup
 " показывать совпадающие скобки для HTML-тегов
-set mps+=<:> 
+set mps+=<:>
 " Проверка орфографии
 "set spell spelllang=ru,en
 " set charset translation encoding
@@ -63,7 +63,7 @@ set termencoding=utf-8
 " set save encoding
 set fileencoding=utf-8
 " Список для определения кодировки файла в порядке предпочтения
-set fileencodings=utf8,cp1251,koi8-r,cp866,ucs-2le   
+set fileencodings=utf8,cp1251,koi8-r,cp866,ucs-2le
 " Строка состояния
 set laststatus=2   " всегда показывать строку статуса
 set statusline=%f%m%r%h%w\ %y\ enc:%{&enc}\ ff:%{&ff}\ fenc:%{&fenc}%=(ch:%3b\ hex:%2B)\ col:%2c\ line:%2l/%L\ [%2p%%]
@@ -104,7 +104,7 @@ set directory=~/.vim/swaps
 "set cursorline
 "highlight CursorLine guibg=lightblue ctermbg=lightblue
 "highlight CursorLine term=none cterm=inverse,bold
-" В 7-й версии увеличиваем вложенность UNDO 
+" В 7-й версии увеличиваем вложенность UNDO
 if version >= 700
     set history=64
     set undolevels=128
@@ -114,7 +114,7 @@ if version >= 700
     set undoreload=10000
 endif
 "
-"    Работа с мышкой 
+"    Работа с мышкой
 "
 " set mouse=a
 " Скрывать указатель мыши, когда печатаем
@@ -122,17 +122,17 @@ endif
 "
 "   Маппинг клавиш
 "
-" прокручивать текст колёсиком мыши и вставлять выделенное в X`ах мышкой в Vim нажатием средней кнопки мыши 
+" прокручивать текст колёсиком мыши и вставлять выделенное в X`ах мышкой в Vim нажатием средней кнопки мыши
 map <S-Insert> <MiddleMouse>
 map! <S-Insert> <MiddleMouse>
 " Cохранение по F2
 imap <F2> <Esc>:w<CR>
 map <F2> <Esc>:w<CR>
 " По F3 вставка файла
-imap <F3> <Esc>:read 
-map <F3> <Esc>:read 
+imap <F3> <Esc>:read
+map <F3> <Esc>:read
 " По <F4> открывается новая вкладка (tab) и выводится список каталогов и файлов текущего каталога.
-" imap <F4> <Esc>:browse tabnew<CR> 
+" imap <F4> <Esc>:browse tabnew<CR>
 " map <F4> <Esc>:browse tabnew<CR>
 " По <F5> позволяет переключать вкладки справа-налево, по-порядку, отображая открытые в них файлы.
 imap <F5> <Esc> :tabprev <CR>i
@@ -196,7 +196,7 @@ map <F10> :emenu Encoding.<Tab>
  endfunction
  inoremap <tab> <c-r>=InsertTabWrapper ("forward")<cr>
  inoremap <s-tab> <c-r>=InsertTabWrapper ("backward")<cr>
-" 
+"
 " Всплывающий перевод
 "function! MyBalloonExpr()
 "       return system("sdcv -0nce ". v:beval_text)
@@ -255,7 +255,7 @@ call plug#begin('~/.vim/plugged')
 " Make sure you use single quotes
 
 " Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
-" Plug 'junegunn/vim-easy-align'
+Plug 'junegunn/vim-easy-align'
 
 " Any valid git URL is allowed
 " Plug 'https://github.com/junegunn/vim-github-dashboard.git'
@@ -275,6 +275,16 @@ call plug#begin('~/.vim/plugged')
 
 " Unmanaged plugin (manually installed and updated)
 " Plug '~/my-prototype-plugin'
+Plug 'edkolev/tmuxline.vim'
+Plug 'honza/vim-snippets'
+Plug 'Yggdroot/indentLine'
+Plug 'SirVer/ultisnips'
+" https://github.com/christoomey/vim-tmux-navigator
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
+
+
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -286,10 +296,6 @@ Plug 'ryanoasis/vim-devicons'
 " Initialize plugin system
 call plug#end()
 
-
-
-
-
 "let g:airline_statusline_ontop=1
 let g:airline_powerline_fonts = 1 "Включить поддержку Powerline шрифтов
 "let g:airline#extensions#keymap#enabled = 0 "Не показывать текущий маппинг
@@ -300,6 +306,7 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = '>'
 let g:airline#extensions#tabline#left_alt_sep = '<'
 let g:coc_disable_startup_warning = 1
+let g:tmuxline_preset = 'powerline'
 
 autocmd VimEnter * nmap <F4> :NERDTreeToggle<CR>
 autocmd VimEnter * imap <F4> <Esc>:NERDTreeToggle<CR>a
@@ -337,5 +344,3 @@ augroup json_autocmd
   autocmd FileType json set expandtab
   autocmd FileType json set foldmethod=syntax
 augroup END
-
-
